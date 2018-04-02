@@ -1,0 +1,116 @@
+{
+  "$schema": "./node_modules/@angular-devkit/core/src/workspace/workspace-schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "firebase": {
+      "root": "projects/firebase",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/firebase",
+            "index": "projects/firebase/src/index.html",
+            "main": "projects/firebase/src/main.ts",
+            "polyfills": "projects/firebase/src/polyfills.ts",
+            "tsConfig": "projects/firebase/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "projects/firebase/src",
+                "output": "./"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/firebase/src/assets",
+                "output": "assets"
+              }
+            ],
+            "styles": [
+              {
+                "input": "projects/firebase/src/styles/main.scss"
+              }
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "from": "projects/firebase/src/environments/environment.ts",
+                  "to": "projects/firebase/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "firebase:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "firebase:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "firebase:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/firebase/src/test.ts",
+            "polyfills": "projects/firebase/src/polyfills.ts",
+            "tsConfig": "projects/firebase/tsconfig.spec.json",
+            "karmaConfig": "projects/firebase/karma.conf.js",
+            "styles": [
+              {
+                "input": "projects/firebase/src/styles/main.scss"
+              }
+            ],
+            "scripts": [],
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "projects/firebase/src/",
+                "output": "./"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/firebase/src/assets",
+                "output": "assets"
+              }
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/firebase/tsconfig.app.json",
+              "projects/firebase/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
