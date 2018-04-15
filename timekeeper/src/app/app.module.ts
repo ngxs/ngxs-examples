@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AngularFireModule } from 'angularfire2';
 import { NgxsModule } from '@ngxs/store';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 import { environment } from '../environments/environment';
@@ -26,6 +27,7 @@ import { AppView } from './app.view';
     AngularFireModule.initializeApp(environment.firebase),
 
     NgxsModule.forRoot(),
+    NgxsRouterPluginModule.forRoot(),
 
     NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: environment.production

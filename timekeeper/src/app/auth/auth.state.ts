@@ -1,8 +1,12 @@
+import { ApplicationRef } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
+
+import { Action, Selector, State, StateContext, Store, NgxsOnInit } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
+
 import { take, tap } from 'rxjs/operators';
 
 import {
@@ -25,26 +29,23 @@ import { AuthStateModel, User } from './auth.model';
     user: null
   }
 })
-export class AuthState {
+export class AuthState implements NgxsOnInit {
 
-  constructor(private store: Store, private auth: AngularFireAuth, private router: Router) {
-    console.log('SecurityStateModel');
-  }
+  constructor(private store: Store, private afAuth: AngularFireAuth, private ref: ApplicationRef) {}
 
   /**
    * Selectors
    */
   @Selector()
   static getUser(state: AuthStateModel) {
-    console.log('getUser', state);
     return state.user;
   }
 
   /**
    * Dispatch CheckSession on start
    */
-  onInit() {
-    this.store.dispatch(new CheckSession());
+  ngxsOnInit(sc: StateContext<AuthStateModel>) {
+    sc.dispatch(new CheckSession());
   }
 
   /**
@@ -52,7 +53,7 @@ export class AuthState {
    */
   @Action(CheckSession)
   checkSession(sc: StateContext<AuthStateModel>) {
-    return this.auth.authState.pipe(
+    return this.afAuth.authState.pipe(
       take(1),
       tap((user: User) => {
         if (user) {
@@ -68,7 +69,7 @@ export class AuthState {
   @Action(LoginWithGoogle)
   loginWithGoogle(sc: StateContext<AuthStateModel>) {
     const provider = new firebase.auth.GoogleAuthProvider();
-    this.auth.auth.signInWithPopup(provider).then(
+    return this.afAuth.auth.signInWithPopup(provider).then(
       (response: { user: User }) => {
         sc.dispatch(new LoginSuccess(response.user));
       })
@@ -80,7 +81,7 @@ export class AuthState {
   @Action(LoginWithFacebook)
   loginWithFacebook(sc: StateContext<AuthStateModel>) {
     const provider = new firebase.auth.FacebookAuthProvider();
-    this.auth.auth.signInWithPopup(provider).then(
+    return this.afAuth.auth.signInWithPopup(provider).then(
       (response: { user: User }) => {
         sc.dispatch(new LoginSuccess(response.user));
       })
@@ -91,7 +92,7 @@ export class AuthState {
 
   @Action(LoginWithEmailAndPassword)
   loginWithEmailAndPassword(sc: StateContext<AuthStateModel>, action: LoginWithEmailAndPassword) {
-    this.auth.auth.signInWithEmailAndPassword(action.email, action.password).then(
+    return this.afAuth.auth.signInWithEmailAndPassword(action.email, action.password).then(
       (user: User) => {
         sc.dispatch(new LoginSuccess(user));
       })
@@ -102,7 +103,7 @@ export class AuthState {
 
   @Action(Logout)
   logout(sc: StateContext<AuthStateModel>) {
-    this.auth.auth.signOut().then(
+    return this.afAuth.auth.signOut().then(
       () => {
         sc.dispatch(new LogoutSuccess());
       });
@@ -113,15 +114,17 @@ export class AuthState {
    */
 
   @Action(LoginSuccess)
-  onLoginSuccess() {
+  onLoginSuccess(sc: StateContext<AuthStateModel>) {
     console.log('onLoginSuccess, navigating to /dashboard');
-    this.router.navigateByUrl('/dashboard');
+    sc.dispatch(new Navigate(['/dashboard']));
+    this.ref.tick();
   }
 
   @Action(LoginRedirect)
-  onLoginRedirect() {
+  onLoginRedirect(sc: StateContext<AuthStateModel>) {
     console.log('onLoginRedirect, navigating to /auth/login');
-    this.router.navigateByUrl('/auth/login');
+    sc.dispatch(new Navigate(['/auth/login']));
+    this.ref.tick();
   }
 
   @Action(LoginSuccess)

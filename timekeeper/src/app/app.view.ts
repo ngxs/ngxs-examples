@@ -7,11 +7,4 @@ import { Actions } from '@ngxs/store';
   styleUrls: ['./app.view.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppView {
-
-  constructor(private actions: Actions) {
-    // actions.subscribe(action => {
-    //   console.log('action', action);
-    // });
-  }
-}
+export class AppView {}
