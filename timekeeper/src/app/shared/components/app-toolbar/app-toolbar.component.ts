@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { AuthState, Logout, User } from '../../../auth';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',

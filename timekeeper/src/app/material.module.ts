@@ -1,7 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { MatButtonModule, MatCardModule, MATERIAL_SANITY_CHECKS, MatIconModule, MatMenuModule, MatToolbarModule } from '@angular/material';
+import { NgModule } from '@angular/core';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MATERIAL_SANITY_CHECKS,
+  MatIconModule,
+  MatMenuModule,
+  MatProgressSpinnerModule,
+  MatToolbarModule,
+} from '@angular/material';
 
 const SHARED_MODULES = [
   CommonModule,
@@ -10,6 +17,7 @@ const SHARED_MODULES = [
   MatToolbarModule,
   MatMenuModule,
   MatIconModule,
+  MatProgressSpinnerModule,
 ];
 
 @NgModule({

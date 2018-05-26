@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {
     path: 'dashboard',
-    canActivate:[AuthenticatedGuard],
+    canActivate: [AuthenticatedGuard],
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
 ];

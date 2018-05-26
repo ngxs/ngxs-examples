@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<router-outlet *ngIf="initialized$ | async; else loading"></router-outlet>
+
+<ng-template #loading>
+  <div class="loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+</ng-template>

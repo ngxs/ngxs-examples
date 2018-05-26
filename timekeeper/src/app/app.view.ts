@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Actions } from '@ngxs/store';
+import { Actions, Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { AuthState } from './auth';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,9 @@ import { Actions } from '@ngxs/store';
   styleUrls: ['./app.view.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppView {}
+export class AppView {
+
+  @Select(AuthState.getInitialized)
+  initialized$: Observable<boolean>;
+
+}

@@ -13,6 +13,7 @@ const SHARED_COMPONENTS = [
   declarations: SHARED_COMPONENTS,
   exports: [
     ...SHARED_COMPONENTS,
+    MaterialModule,
   ]
 })
 export class SharedModule { }

@@ -12,12 +12,10 @@ import { AuthState } from './auth.state';
 @Injectable()
 export class AuthenticatedGuard implements CanActivate {
 
-  @Select(AuthState.getUser) user$: Observable<User | undefined>;
-
   constructor(private store: Store) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.user$.pipe(
+    return this.store.selectOnce(AuthState.getUser).pipe(
       map(u => {
         if (!u) {
           this.store.dispatch(new LoginRedirect());
