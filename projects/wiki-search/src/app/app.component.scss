@@ -1,0 +1,6 @@
+:host {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  justify-content: start;
+  grid-gap: 40px;
+}

@@ -1,0 +1,10 @@
+{
+  "/wiki-api": {
+    "target": "https://en.wikipedia.org/w/api.php",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/wiki-api": ""
+    }
+  }
+}

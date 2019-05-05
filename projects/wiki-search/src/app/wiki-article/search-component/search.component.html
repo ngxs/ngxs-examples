@@ -1,0 +1,7 @@
+<input [formControl]="inputControl" />
+<button (click)="onSearch()">Поиск</button>
+<div>Найдено: {{ searchItems.length }}</div>
+<div *ngFor="let item of searchItems" class="list-item">
+  {{ item.title }}
+  <i (click)="addFavorite(item)" class="fa fa-star"></i>
+</div>

@@ -1,0 +1,6 @@
+<div *ngIf="inProgress">Загрузка контента...</div>
+<div *ngIf="errorString">{{ errorString }}</div>
+<ng-template let-content [ngIf]="content$ | async">
+  <h1>{{ content.parse.title }}</h1>
+  <div [innerHTML]="content.parse.text['*']"></div>
+</ng-template>
