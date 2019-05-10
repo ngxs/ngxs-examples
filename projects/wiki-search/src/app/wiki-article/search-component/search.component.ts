@@ -3,7 +3,7 @@ import { ApiService } from '@wikiSearch/services/api.service';
 import { first, finalize, switchMapTo } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { FormControl, Validators } from '@angular/forms';
-import { ISearchItem } from '@wikiSearch/models/search-result.model';
+import { SearchItem } from '@wikiSearch/models/search-result.model';
 import { Store } from '@ngxs/store';
 import { AddFavorite } from '@wikiSearch/wiki-article/state/wiki-article.actions';
 
@@ -24,7 +24,7 @@ export class SearchComponent {
   public inputControl = new FormControl(null, Validators.required);
 
   /** search results array */
-  public searchItems: ISearchItem[] = [];
+  public searchItems: SearchItem[] = [];
 
   /** error text when http request return not 200 status */
   public errorMsg: string;
@@ -59,7 +59,7 @@ export class SearchComponent {
   }
 
   /** send choosed search result to store */
-  public addFavorite(item: ISearchItem): void {
+  public addFavorite(item: SearchItem): void {
     this.store.dispatch(new AddFavorite(item));
   }
 }

@@ -1,13 +1,13 @@
-import { ISearchItem } from '@wikiSearch/models/search-result.model';
+import { SearchItem } from '@wikiSearch/models/search-result.model';
 
 export class AddFavorite {
   static type = '[NGXS] Add Favorite';
-  constructor(public payload: ISearchItem) {}
+  constructor(public payload: SearchItem) {}
 }
 
 export class DeleteFavorite {
   static type = '[NGXS] Delete Favorite';
-  constructor(public payload: ISearchItem) {}
+  constructor(public payload: SearchItem) {}
 }
 
 export class LoadContent {

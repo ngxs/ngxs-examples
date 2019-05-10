@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IParsePage } from '@wikiSearch/models/search-result.model';
-import { NgxsState } from '@wikiSearch/wiki-article/state/wiki-article.state';
+import { ParsePage } from '@wikiSearch/models/search-result.model';
+import { WikiArticlesStore } from '@wikiSearch/wiki-article/state/wiki-article.state';
 import { Select, Actions, ofActionDispatched, ofActionCompleted, ofActionErrored } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { LoadContent } from '@wikiSearch/wiki-article/state/wiki-article.actions';
@@ -21,12 +21,12 @@ export class ContentComponent implements OnInit, OnDestroy {
    * bind NGXS Sate Selector "NgxsState.articleTitle" with property of component,
    * in current case we get article title directly to "articleTitle$" as Observable
    */
-  @Select(NgxsState.articleTitle)
+  @Select(WikiArticlesStore.articleTitle)
   public articleTitle$: Observable<string>;
 
   /** get content of selected article as Observable */
-  @Select(NgxsState.content)
-  public content$: Observable<IParsePage>;
+  @Select(WikiArticlesStore.content)
+  public content$: Observable<ParsePage>;
 
   /** flag of load content progress */
   public inProgress = false;

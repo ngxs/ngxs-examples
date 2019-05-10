@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { NgxsState } from './wiki-article/state/wiki-article.state';
+import { WikiArticlesStore } from './wiki-article/state/wiki-article.state';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './wiki-article/search-component/search.component';
 import { FavoritesComponent } from './wiki-article/favorites-component/favorites.component';
@@ -17,7 +17,7 @@ import { ContentComponent } from './wiki-article/content-component/content.compo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxsModule.forRoot([NgxsState]),
+    NgxsModule.forRoot([WikiArticlesStore]),
     NgxsReduxDevtoolsPluginModule.forRoot()
   ],
   providers: [],

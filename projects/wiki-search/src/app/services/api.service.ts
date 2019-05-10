@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { ISearchResult, IParsePage } from '@wikiSearch/models/search-result.model';
+import { SearchResult, ParsePage } from '@wikiSearch/models/search-result.model';
 
 /**
  * Service for sending API requests
@@ -12,8 +12,8 @@ import { ISearchResult, IParsePage } from '@wikiSearch/models/search-result.mode
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  search(srsearch: string): Observable<ISearchResult> {
-    return this.http.get<ISearchResult>('/wiki-api', {
+  search(srsearch: string): Observable<SearchResult> {
+    return this.http.get<SearchResult>('/wiki-api', {
       params: {
         action: 'query',
         list: 'search',
@@ -23,8 +23,8 @@ export class ApiService {
     });
   }
 
-  loadPage(pageId: number): Observable<IParsePage> {
-    return this.http.get<IParsePage>('/wiki-api', {
+  loadPage(pageId: number): Observable<ParsePage> {
+    return this.http.get<ParsePage>('/wiki-api', {
       params: {
         action: 'parse',
         pageid: String(pageId),

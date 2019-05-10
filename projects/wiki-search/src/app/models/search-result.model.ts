@@ -1,16 +1,16 @@
 /**
  * Wiki search query response model
  */
-export interface ISearchResult {
+export interface SearchResult {
   query: {
-    search: ISearchItem[];
+    search: SearchItem[];
   };
 }
 
 /**
  * Wiki brief article model
  */
-export interface ISearchItem {
+export interface SearchItem {
   title: string;
   pageid: number;
   snippet: string;
@@ -19,7 +19,7 @@ export interface ISearchItem {
 /**
  * Wiki full article model
  */
-export interface IParsePage {
+export interface ParsePage {
   parse: {
     text: { '*': string };
     title: string;

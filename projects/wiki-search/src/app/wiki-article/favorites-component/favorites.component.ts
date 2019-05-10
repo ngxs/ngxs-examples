@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ISearchItem } from '@wikiSearch/models/search-result.model';
-import { NgxsState } from '@wikiSearch/wiki-article/state/wiki-article.state';
+import { SearchItem } from '@wikiSearch/models/search-result.model';
+import { WikiArticlesStore } from '@wikiSearch/wiki-article/state/wiki-article.state';
 import { DeleteFavorite, LoadContent, ClearContent, SelectId } from '@wikiSearch/wiki-article/state/wiki-article.actions';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -19,11 +19,11 @@ export class FavoritesComponent {
    * bind NGXS Sate Selector "NgxsState.favorites" with property of component,
    * in current case we get a favorites list directly to "favorites$" as Observable
    */
-  @Select(NgxsState.favorites)
-  public favorites$: Observable<ISearchItem[]>;
+  @Select(WikiArticlesStore.favorites)
+  public favorites$: Observable<SearchItem[]>;
 
   /** get id of selected article as Observable */
-  @Select(NgxsState.selectId)
+  @Select(WikiArticlesStore.selectId)
   public selectId$: Observable<number>;
 
   /** flag to see which article was uploaded */
@@ -32,7 +32,7 @@ export class FavoritesComponent {
   constructor(private store: Store) {}
 
   /** start to loading article content */
-  public loadContent(item: ISearchItem): void {
+  public loadContent(item: SearchItem): void {
     this.store.dispatch([ClearContent, new LoadContent(item.pageid)]).subscribe(
       () => {
         /** the first callback means that Action was success done */
@@ -49,7 +49,7 @@ export class FavoritesComponent {
   }
 
   /** remove article from Store */
-  public deleteFavorite(item: ISearchItem): void {
+  public deleteFavorite(item: SearchItem): void {
     this.store.dispatch(new DeleteFavorite(item));
   }
 }
