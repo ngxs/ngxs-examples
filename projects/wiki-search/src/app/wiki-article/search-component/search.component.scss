@@ -1,18 +1,40 @@
-.list-item {
-  background-color: #eee;
-  margin: 5px 0;
-  padding: 5px 10px;
-  max-width: 200px;
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  grid-gap: 0 5px;
-  align-items: center;
+$leftOffset: 10px;
+$spaceBetweenRows: 5px;
 
-  &.selected {
-    background-color: burlywood;
+.search-bar {
+  display: flex;
+  margin-bottom: $spaceBetweenRows;
 
-    &.loaded {
-      background-color: yellowgreen;
+  input {
+    padding-left: calc(#{$leftOffset} - 1px);
+    flex: 1;
+    margin-right: 10px;
+    border: 1px solid darkgrey;
+
+    &.ng-touched.ng-invalid {
+      border-color: chocolate;
     }
   }
+}
+
+.results {
+  padding-left: $leftOffset;
+  color: lightslategray;
+  margin-bottom: $spaceBetweenRows;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: $spaceBetweenRows 5px;
+  align-items: center;
+
+  .title {
+    padding: 5px $leftOffset;
+    background-color: #eee;
+  }
+}
+
+.error-msg {
+  color: chocolate;
 }

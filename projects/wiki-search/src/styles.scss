@@ -4,6 +4,10 @@ html {
     sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 input,
 button {
   font-family: inherit;
@@ -11,7 +15,7 @@ button {
 }
 
 .fa-star {
-  color: goldenrod;
+  color: orangered;
   cursor: pointer;
 }
 
