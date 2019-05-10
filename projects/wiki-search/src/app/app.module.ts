@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { SearchComponent } from './wiki-article/search-component/search.component';
 import { FavoritesComponent } from './wiki-article/favorites-component/favorites.component';
 import { ContentComponent } from './wiki-article/content-component/content.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, SearchComponent, FavoritesComponent, ContentComponent],
@@ -17,7 +18,7 @@ import { ContentComponent } from './wiki-article/content-component/content.compo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxsModule.forRoot([WikiArticlesStore]),
+    NgxsModule.forRoot([WikiArticlesStore], { developmentMode: !environment.production }),
     NgxsReduxDevtoolsPluginModule.forRoot()
   ],
   providers: [],
