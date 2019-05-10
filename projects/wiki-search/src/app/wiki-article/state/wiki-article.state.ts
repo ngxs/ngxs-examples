@@ -1,4 +1,5 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
+import { ImmutableContext, ImmutableSelector } from '@ngxs-labs/immer-adapter';
 import { AddFavorite, DeleteFavorite, LoadContent, ClearContent, SelectId } from './wiki-article.actions';
 import { SearchItem, ParsePage } from '@wiki-search/models/search-result.model';
 import { ApiService } from '@wiki-search/services/api.service';
@@ -27,25 +28,29 @@ export class WikiArticlesStore {
   }
 
   @Selector()
-  static content(state: WikiArticlesState) {
+  @ImmutableSelector()
+  static content(state: WikiArticlesState): ParsePage {
     return state.content;
   }
 
   @Selector()
-  static favorites(state: WikiArticlesState) {
+  @ImmutableSelector()
+  static favorites(state: WikiArticlesState): SearchItem[] {
     return state.favorites;
   }
 
   @Selector()
-  static selectId(state: WikiArticlesState) {
+  static selectId(state: WikiArticlesState): number {
     return state.selectetId;
   }
 
   @Action(AddFavorite)
-  addFavorite({ patchState, getState }: StateContext<WikiArticlesState>, { payload }: AddFavorite) {
-    const favorites = getState().favorites;
-    favorites.push(payload);
-    patchState({ favorites });
+  @ImmutableContext()
+  addFavorite({ setState }: StateContext<WikiArticlesState>, { payload }: AddFavorite) {
+    setState((state: WikiArticlesState) => {
+      state.favorites.push(payload);
+      return state;
+    });
   }
 
   @Action(DeleteFavorite)

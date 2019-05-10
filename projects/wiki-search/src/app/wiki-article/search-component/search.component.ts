@@ -40,6 +40,7 @@ export class SearchComponent {
     this.inProgress = true;
     this.searchItems = [];
     const tag: string = this.inputControl.value;
+    this.errorMsg = '';
 
     this.api
       .search(tag)
