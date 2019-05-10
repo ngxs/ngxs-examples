@@ -1,6 +1,17 @@
-<div *ngIf="inProgress">Загрузка контента...</div>
-<div *ngIf="errorString">{{ errorString }}</div>
-<ng-template let-content [ngIf]="content$ | async">
-  <h1>{{ content.parse.title }}</h1>
-  <div [innerHTML]="content.parse.text['*']"></div>
+<div class="title">{{ articleTitle$ | async }}</div>
+<div class="progress">
+  <ng-container *ngTemplateOutlet="inProgress ? progressBar : emptyBar"></ng-container>
+</div>
+
+<div class="content" *ngIf="content$ | async as content" [innerHTML]="content.parse.text['*']"></div>
+
+<ng-template #progressBar>
+  Loading content
+  <i class="fa fa-refresh  fa-spin"></i>
 </ng-template>
+
+<ng-template #emptyBar>
+  {{ (content$ | async) && !errorString ? '' : 'No selected article' }}
+</ng-template>
+
+<span class="error-msg" *ngIf="errorString">{{ errorString }}</span>

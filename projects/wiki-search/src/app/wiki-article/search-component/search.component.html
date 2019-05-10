@@ -10,7 +10,7 @@
 
 <div class="result-grid">
   <ng-template ngFor let-item [ngForOf]="searchItems">
-    <div class="title">{{ item.title }}</div>
+    <div class="label">{{ item.title }}</div>
     <i (click)="addFavorite(item)" class="fa fa-star"></i>
   </ng-template>
 </div>

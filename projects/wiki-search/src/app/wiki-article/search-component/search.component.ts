@@ -33,7 +33,7 @@ export class SearchComponent {
 
   /** submit search request */
   public onSearch(): void {
-    if (!this.inputControl.valid) {
+    if (!this.inputControl.valid || this.inProgress) {
       return;
     }
 

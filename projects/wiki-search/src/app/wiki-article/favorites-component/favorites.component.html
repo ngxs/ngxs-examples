@@ -1,11 +1,12 @@
-Закладки: {{ (favorites$ | async).length }}
-<div
-  *ngFor="let item of favorites$ | async"
-  class="list-item"
-  [class.selected]="(selectId$ | async) === item.pageid"
-  [class.loaded]="loadId === item.pageid"
->
-  {{ item.title }}
-  <i (click)="loadContent(item)" class="fa fa-book"></i>
-  <i (click)="deleteFavorite(item)" class="fa fa-trash"></i>
+<div class="title">Favorite articles</div>
+<div class="total">Total: {{ (favorites$ | async).length }}</div>
+
+<div class="favorites-grid">
+  <ng-template ngFor let-item [ngForOf]="favorites$ | async">
+    <div class="label" [class.selected]="(selectId$ | async) === item.pageid" [class.loaded]="loadId === item.pageid">
+      {{ item.title }}
+    </div>
+    <i (click)="loadContent(item)" class="fa fa-book"></i>
+    <i (click)="deleteFavorite(item)" class="fa fa-trash"></i>
+  </ng-template>
 </div>

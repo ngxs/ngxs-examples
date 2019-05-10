@@ -1,7 +1,6 @@
 :host {
   display: grid;
-  grid-template-columns: 250px 250px 1fr;
+  grid-template-columns: 1fr 1fr 5fr;
   justify-content: start;
-  grid-gap: 40px;
-  margin: 20px;
+  grid-gap: 4%;
 }

@@ -1,5 +1,4 @@
-$leftOffset: 10px;
-$spaceBetweenRows: 5px;
+@import 'vars';
 
 .search-bar {
   display: flex;
@@ -7,7 +6,7 @@ $spaceBetweenRows: 5px;
 
   input {
     padding-left: calc(#{$leftOffset} - 1px);
-    flex: 1;
+    width: 100%;
     margin-right: 10px;
     border: 1px solid darkgrey;
 
@@ -29,7 +28,7 @@ $spaceBetweenRows: 5px;
   grid-gap: $spaceBetweenRows 5px;
   align-items: center;
 
-  .title {
+  .label {
     padding: 5px $leftOffset;
     background-color: #eee;
   }

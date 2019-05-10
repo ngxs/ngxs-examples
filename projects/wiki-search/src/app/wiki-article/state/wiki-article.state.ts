@@ -18,6 +18,15 @@ export class NgxsState {
   constructor(private api: ApiService) {}
 
   @Selector()
+  static articleTitle(state: INgxsState): string {
+    if (state.selectetId && !state.content) {
+      return 'Loading...';
+    }
+
+    return state.content ? state.content.parse.title : 'Empty';
+  }
+
+  @Selector()
   static content(state: INgxsState) {
     return state.content;
   }

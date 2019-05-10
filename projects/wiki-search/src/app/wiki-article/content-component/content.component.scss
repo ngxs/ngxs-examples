@@ -1,0 +1,26 @@
+@import 'vars';
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: calc(#{$rowBarHeight} - 1px);
+  color: lightslategray;
+  border-bottom: 1px solid #bbb;
+  text-align: center;
+  margin-bottom: $spaceBetweenRows;
+}
+
+.progress {
+  padding-left: $leftOffset;
+  color: lightslategray;
+  margin-bottom: $spaceBetweenRows;
+}
+
+.content {
+  height: calc(100vh - #{$rowBarHeight} - #{$spaceBetweenRows} - (#{$bodyMargin} * 2));
+  overflow: auto;
+}
+
+.error-msg {
+  color: chocolate;
+}

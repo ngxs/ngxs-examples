@@ -42,6 +42,9 @@
             "tsConfig": "projects/wiki-search/tsconfig.app.json",
             "assets": ["projects/wiki-search/src/favicon.ico", "projects/wiki-search/src/assets"],
             "styles": ["projects/wiki-search/src/styles.scss", "node_modules/font-awesome/css/font-awesome.css"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects/wiki-search/src/app/styles"]
+            },
             "scripts": [],
             "es5BrowserSupport": true
           },
