@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { SearchItem } from '@wikiSearch/models/search-result.model';
-import { WikiArticlesStore } from '@wikiSearch/wiki-article/state/wiki-article.state';
-import { DeleteFavorite, LoadContent, ClearContent, SelectId } from '@wikiSearch/wiki-article/state/wiki-article.actions';
+import { SearchItem } from '@wiki-search/models/search-result.model';
+import { WikiArticlesStore } from '@wiki-search/wiki-article/state/wiki-article.state';
+import { DeleteFavorite, LoadContent, ClearContent, SelectId } from '@wiki-search/wiki-article/state/wiki-article.actions';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 

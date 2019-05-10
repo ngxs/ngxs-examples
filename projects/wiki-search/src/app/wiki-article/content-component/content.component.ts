@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ParsePage } from '@wikiSearch/models/search-result.model';
-import { WikiArticlesStore } from '@wikiSearch/wiki-article/state/wiki-article.state';
+import { ParsePage } from '@wiki-search/models/search-result.model';
+import { WikiArticlesStore } from '@wiki-search/wiki-article/state/wiki-article.state';
 import { Select, Actions, ofActionDispatched, ofActionCompleted, ofActionErrored } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
-import { LoadContent } from '@wikiSearch/wiki-article/state/wiki-article.actions';
+import { LoadContent } from '@wiki-search/wiki-article/state/wiki-article.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { takeUntil } from 'rxjs/operators';
 

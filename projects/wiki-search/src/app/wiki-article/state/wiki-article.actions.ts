@@ -1,4 +1,4 @@
-import { SearchItem } from '@wikiSearch/models/search-result.model';
+import { SearchItem } from '@wiki-search/models/search-result.model';
 
 export class AddFavorite {
   static type = '[NGXS] Add Favorite';

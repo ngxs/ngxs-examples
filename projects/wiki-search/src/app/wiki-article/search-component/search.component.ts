@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { ApiService } from '@wikiSearch/services/api.service';
+import { ApiService } from '@wiki-search/services/api.service';
 import { first, finalize, switchMapTo } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { FormControl, Validators } from '@angular/forms';
-import { SearchItem } from '@wikiSearch/models/search-result.model';
+import { SearchItem } from '@wiki-search/models/search-result.model';
 import { Store } from '@ngxs/store';
-import { AddFavorite } from '@wikiSearch/wiki-article/state/wiki-article.actions';
+import { AddFavorite } from '@wiki-search/wiki-article/state/wiki-article.actions';
 
 /**
  * This is search component.

@@ -1,7 +1,7 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { AddFavorite, DeleteFavorite, LoadContent, ClearContent, SelectId } from './wiki-article.actions';
-import { SearchItem, ParsePage } from '@wikiSearch/models/search-result.model';
-import { ApiService } from '@wikiSearch/services/api.service';
+import { SearchItem, ParsePage } from '@wiki-search/models/search-result.model';
+import { ApiService } from '@wiki-search/services/api.service';
 import { tap } from 'rxjs/operators';
 
 interface WikiArticlesState {

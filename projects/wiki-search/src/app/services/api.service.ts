@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { SearchResult, ParsePage } from '@wikiSearch/models/search-result.model';
+import { SearchResult, ParsePage } from '@wiki-search/models/search-result.model';
 
 /**
  * Service for sending API requests
