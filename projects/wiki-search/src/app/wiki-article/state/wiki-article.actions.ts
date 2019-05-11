@@ -1,25 +1,25 @@
 import { SearchItem } from '@wiki-search/models/search-result.model';
 
 export class AddFavorite {
-  static type = '[NGXS] Add Favorite';
-  constructor(public payload: SearchItem) {}
+  static type = '[Wiki articles] Add favorite';
+  constructor(public favoriteItem: SearchItem) {}
 }
 
 export class DeleteFavorite {
-  static type = '[NGXS] Delete Favorite';
-  constructor(public payload: SearchItem) {}
+  static type = '[Wiki articles] Delete favorite';
+  constructor(public favoriteItem: SearchItem) {}
 }
 
 export class LoadContent {
-  static type = '[NGXS] Load Content';
+  static type = '[Wiki articles] Load article content';
   constructor(public pageId: number) {}
 }
 
 export class ClearContent {
-  static type = '[NGXS] Clear Content';
+  static type = '[Wiki articles] Clear article content';
 }
 
 export class SelectId {
-  static type = '[NGXS] Select Id';
+  static type = '[Wiki articles] Select article Id';
   constructor(public id: number) {}
 }

@@ -1,9 +1,9 @@
 <div class="title">{{ articleTitle$ | async }}</div>
-<div class="progress">
+<div class="status">
   <ng-container *ngTemplateOutlet="inProgress ? progressBar : emptyBar"></ng-container>
 </div>
 
-<div class="content" *ngIf="content$ | async as content" [innerHTML]="content.parse.text['*']"></div>
+<div class="content" [innerHTML]="safeContent$ | async"></div>
 
 <ng-template #progressBar>
   Loading content
@@ -11,7 +11,7 @@
 </ng-template>
 
 <ng-template #emptyBar>
-  {{ (content$ | async) && !errorString ? '' : 'No selected article' }}
+  {{ (safeContent$ | async) && !errorString ? '' : 'No selected article' }}
 </ng-template>
 
 <span class="error-msg" *ngIf="errorString">{{ errorString }}</span>

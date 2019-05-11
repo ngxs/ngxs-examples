@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ParsePage } from '@wiki-search/models/search-result.model';
 import { WikiArticlesStore } from '@wiki-search/wiki-article/state/wiki-article.state';
-import { Select, Actions, ofActionDispatched, ofActionCompleted, ofActionErrored } from '@ngxs/store';
+import { Select, Actions, Store, ofActionDispatched, ofActionCompleted, ofActionErrored } from '@ngxs/store';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable, Subject } from 'rxjs';
 import { LoadContent } from '@wiki-search/wiki-article/state/wiki-article.actions';
 import { HttpErrorResponse } from '@angular/common/http';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, distinctUntilChanged, map } from 'rxjs/operators';
 
 /**
  * This is component for show content of selected article.
@@ -24,9 +24,12 @@ export class ContentComponent implements OnInit, OnDestroy {
   @Select(WikiArticlesStore.articleTitle)
   public articleTitle$: Observable<string>;
 
-  /** get content of selected article as Observable */
+  /** get unsafe content of selected article as Observable */
   @Select(WikiArticlesStore.content)
-  public content$: Observable<ParsePage>;
+  private unsafeContent$: Observable<string>;
+
+  /** safe content of selected article as Observable */
+  public safeContent$: Observable<SafeHtml>;
 
   /** flag of load content progress */
   public inProgress = false;
@@ -36,9 +39,10 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   private unsubscriber$ = new Subject<void>();
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions, private sanitized: DomSanitizer, private store: Store) {}
 
   ngOnInit(): void {
+    this.prepareContent();
     this.subscribeToActionDispatched();
     this.subscribeToActionCompleted();
     this.subscribeToActionErrored();
@@ -47,6 +51,14 @@ export class ContentComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscriber$.next();
     this.unsubscriber$.complete();
+  }
+
+  /** map wiki raw content to safe html */
+  private prepareContent(): void {
+    this.safeContent$ = this.unsafeContent$.pipe(
+      takeUntil(this.unsubscriber$),
+      map(unsafeHtml => this.sanitized.bypassSecurityTrustHtml(unsafeHtml))
+    );
   }
 
   /** mark the start of download content */

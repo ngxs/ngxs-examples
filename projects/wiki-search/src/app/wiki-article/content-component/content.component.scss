@@ -10,14 +10,14 @@
   margin-bottom: $spaceBetweenRows;
 }
 
-.progress {
+.status {
   padding-left: $leftOffset;
   color: lightslategray;
   margin-bottom: $spaceBetweenRows;
 }
 
 .content {
-  height: calc(100vh - #{$rowBarHeight} - #{$spaceBetweenRows} - (#{$bodyMargin} * 2));
+  max-height: calc(100vh - #{$rowBarHeight} - #{$spaceBetweenRows} - (#{$bodyMargin} * 2));
   overflow: auto;
 }
 
