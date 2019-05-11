@@ -2,7 +2,6 @@ import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { ImmutableContext, ImmutableSelector } from '@ngxs-labs/immer-adapter';
 import { AddFavorite, DeleteFavorite, LoadContent, ClearContent, SelectId } from './wiki-article.actions';
 import { SearchItem, ParsePage } from '@wiki-search/models/search-result.model';
-import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '@wiki-search/services/api.service';
 import { tap, switchMapTo } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -72,14 +71,9 @@ export class WikiArticlesStore {
   @ImmutableContext()
   addFavorite({ setState, getState }: StateContext<WikiArticlesState>, { favoriteItem }: AddFavorite) {
     const state = getState();
+    const isUniqueFavorite = !state.favorites.some(favorite => favorite.pageid === favoriteItem.pageid);
 
-    /**
-     * actually the state variable is Proxy(after Immer processing) and we can use only get or set,
-     * so firstly we get favorites from Proxy and after that looking for repeats
-     */
-    const favorites = [...state.favorites];
-
-    if (!favorites.some(favorite => favorite.pageid === favoriteItem.pageid)) {
+    if (isUniqueFavorite) {
       state.favorites.push(favoriteItem);
     }
 
