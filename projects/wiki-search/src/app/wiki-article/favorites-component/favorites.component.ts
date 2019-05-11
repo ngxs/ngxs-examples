@@ -40,7 +40,7 @@ export class FavoritesComponent {
       },
       () => {
         /**
-         * the second callback means that in stream of Action appeared exclude,
+         * the second callback means that appeared exclude iside of Action stream,
          * usually it may be API request error
          */
         this.store.dispatch(new SelectId(null));

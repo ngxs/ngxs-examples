@@ -93,12 +93,8 @@ export class ContentComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscriber$),
         ofActionErrored(LoadContent)
       )
-      .subscribe((error: HttpErrorResponse) => {
-        /**
-         * Why Action has an http error body?
-         * Because it received this from HttpClient stream
-         */
-        this.errorString = `Something wrong with Wiki API: ${error.message}`;
+      .subscribe(() => {
+        this.errorString = 'Something wrong with Wiki API';
       });
   }
 }

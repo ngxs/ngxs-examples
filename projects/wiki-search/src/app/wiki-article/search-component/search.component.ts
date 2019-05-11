@@ -45,7 +45,7 @@ export class SearchComponent {
     this.api
       .search(tag)
       .pipe(
-        // switchMapTo(throwError('Oops! I broke Wiki!')),
+        // switchMapTo(throwError('Oops! I broked the Wiki!')),
         finalize(() => (this.inProgress = false)),
         first()
       )
