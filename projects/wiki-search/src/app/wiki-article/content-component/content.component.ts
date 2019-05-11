@@ -5,7 +5,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable, Subject } from 'rxjs';
 import { LoadContent } from '@wiki-search/wiki-article/state/wiki-article.actions';
 import { HttpErrorResponse } from '@angular/common/http';
-import { takeUntil, distinctUntilChanged, map } from 'rxjs/operators';
+import { takeUntil, distinctUntilChanged, map, switchMapTo } from 'rxjs/operators';
 
 /**
  * This is component for show content of selected article.
@@ -56,8 +56,8 @@ export class ContentComponent implements OnInit, OnDestroy {
   /** map wiki raw content to safe html */
   private prepareContent(): void {
     this.safeContent$ = this.unsafeContent$.pipe(
-      takeUntil(this.unsubscriber$),
-      map(unsafeHtml => this.sanitized.bypassSecurityTrustHtml(unsafeHtml))
+      map(unsafeHtml => this.sanitized.bypassSecurityTrustHtml(unsafeHtml)),
+      takeUntil(this.unsubscriber$)
     );
   }
 
@@ -65,8 +65,8 @@ export class ContentComponent implements OnInit, OnDestroy {
   private subscribeToActionDispatched(): void {
     this.actions$
       .pipe(
-        takeUntil(this.unsubscriber$),
-        ofActionDispatched(LoadContent)
+        ofActionDispatched(LoadContent),
+        takeUntil(this.unsubscriber$)
       )
       .subscribe(() => {
         this.inProgress = true;
@@ -78,8 +78,8 @@ export class ContentComponent implements OnInit, OnDestroy {
   private subscribeToActionCompleted(): void {
     this.actions$
       .pipe(
-        takeUntil(this.unsubscriber$),
-        ofActionCompleted(LoadContent)
+        ofActionCompleted(LoadContent),
+        takeUntil(this.unsubscriber$)
       )
       .subscribe(() => {
         this.inProgress = false;
@@ -90,8 +90,8 @@ export class ContentComponent implements OnInit, OnDestroy {
   private subscribeToActionErrored(): void {
     this.actions$
       .pipe(
-        takeUntil(this.unsubscriber$),
-        ofActionErrored(LoadContent)
+        ofActionErrored(LoadContent),
+        takeUntil(this.unsubscriber$)
       )
       .subscribe(() => {
         this.errorString = 'Something wrong with Wiki API';

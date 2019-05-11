@@ -69,15 +69,16 @@ export class WikiArticlesStore {
    */
   @Action(AddFavorite)
   @ImmutableContext()
-  addFavorite({ setState, getState }: StateContext<WikiArticlesState>, { favoriteItem }: AddFavorite) {
-    const state = getState();
-    const isUniqueFavorite = !state.favorites.some(favorite => favorite.pageid === favoriteItem.pageid);
+  addFavorite({ setState }: StateContext<WikiArticlesState>, { favoriteItem }: AddFavorite) {
+    setState(state => {
+      const isUniqueFavorite = !state.favorites.some(favorite => favorite.pageid === favoriteItem.pageid);
 
-    if (isUniqueFavorite) {
-      state.favorites.push(favoriteItem);
-    }
+      if (isUniqueFavorite) {
+        state.favorites.push(favoriteItem);
+      }
 
-    setState(state);
+      return state;
+    });
   }
 
   /** delete favorite from favorite list, and clear content if it link with favorite */
