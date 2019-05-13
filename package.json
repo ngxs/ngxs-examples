@@ -2,7 +2,7 @@
   "name": "ngxs-examples",
   "version": "0.0.1",
   "scripts": {
-    "start:1": "ng serve --project=wiki-search --open",
+    "start:1": "ng serve --project=wiki-search --proxy-config proxy.conf.json --open",
     "start:2": "ng serve --project=single-selector --open",
     "start:3": "ng serve --project=document-printing --open",
     "start:4": "ng serve --project=e-shop-cms --open"
@@ -17,7 +17,12 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@ngxs-labs/immer-adapter": "^3.0.3",
+    "@ngxs/devtools-plugin": "^3.4.3",
+    "@ngxs/store": "^3.4.3",
     "core-js": "^2.5.4",
+    "font-awesome": "^4.7.0",
+    "immer": "^3.1.1",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
@@ -27,9 +32,9 @@
     "@angular/cli": "~7.3.6",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
-    "@types/node": "~8.9.4",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

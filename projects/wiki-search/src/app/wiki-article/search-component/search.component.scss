@@ -1,0 +1,39 @@
+@import 'vars';
+
+.search-bar {
+  display: flex;
+  margin-bottom: $spaceBetweenRows;
+
+  input {
+    padding-left: calc(#{$leftOffset} - 1px);
+    width: 100%;
+    margin-right: 10px;
+    border: 1px solid darkgrey;
+
+    &.ng-touched.ng-invalid {
+      border-color: chocolate;
+    }
+  }
+}
+
+.results {
+  padding-left: $leftOffset;
+  color: lightslategray;
+  margin-bottom: $spaceBetweenRows;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: $spaceBetweenRows 5px;
+  align-items: center;
+
+  .label {
+    padding: 5px $leftOffset;
+    background-color: #eee;
+  }
+}
+
+.error-msg {
+  color: chocolate;
+}
