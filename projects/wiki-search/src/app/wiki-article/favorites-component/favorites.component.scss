@@ -1,0 +1,37 @@
+@import 'vars';
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: calc(#{$rowBarHeight} - 1px);
+  color: lightslategray;
+  border-bottom: 1px solid #bbb;
+  text-align: center;
+  margin-bottom: $spaceBetweenRows;
+}
+
+.total {
+  padding-left: $leftOffset;
+  color: lightslategray;
+  margin-bottom: $spaceBetweenRows;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-gap: $spaceBetweenRows 5px;
+  align-items: center;
+
+  .label {
+    padding: 5px $leftOffset;
+    background-color: #eee;
+
+    &.selected {
+      background-color: bisque;
+    }
+
+    &.selected.loaded {
+      background-color: darkseagreen;
+    }
+  }
+}
