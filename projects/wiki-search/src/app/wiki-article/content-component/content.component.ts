@@ -4,8 +4,7 @@ import { Select, Actions, Store, ofActionDispatched, ofActionCompleted, ofAction
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Observable, Subject } from 'rxjs';
 import { LoadContent } from '@wiki-search/wiki-article/state/wiki-article.actions';
-import { HttpErrorResponse } from '@angular/common/http';
-import { takeUntil, distinctUntilChanged, map, switchMapTo } from 'rxjs/operators';
+import { takeUntil, map } from 'rxjs/operators';
 
 /**
  * This is component for show content of selected article.

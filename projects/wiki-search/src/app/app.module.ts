@@ -4,12 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { WikiArticlesStore } from './wiki-article/state/wiki-article.state';
-import { AppComponent } from './app.component';
-import { SearchComponent } from './wiki-article/search-component/search.component';
-import { FavoritesComponent } from './wiki-article/favorites-component/favorites.component';
-import { ContentComponent } from './wiki-article/content-component/content.component';
-import { environment } from '../environments/environment';
+import { WikiArticlesStore } from '@wiki-search/wiki-article/state/wiki-article.state';
+import { AppComponent } from '@wiki-search/app.component';
+import { SearchComponent } from '@wiki-search/wiki-article/search-component/search.component';
+import { FavoritesComponent } from '@wiki-search/wiki-article/favorites-component/favorites.component';
+import { ContentComponent } from '@wiki-search/wiki-article/content-component/content.component';
+import { environment } from 'projects/wiki-search/src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent, SearchComponent, FavoritesComponent, ContentComponent],

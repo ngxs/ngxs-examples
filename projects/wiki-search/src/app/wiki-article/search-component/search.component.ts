@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '@wiki-search/services/api.service';
-import { first, finalize, switchMapTo } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { first, finalize } from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
 import { SearchItem } from '@wiki-search/models/search-result.model';
 import { Store } from '@ngxs/store';
@@ -45,7 +44,6 @@ export class SearchComponent {
     this.api
       .search(tag)
       .pipe(
-        // switchMapTo(throwError('Oops! I broked the Wiki!')),
         finalize(() => (this.inProgress = false)),
         first()
       )

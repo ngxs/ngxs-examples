@@ -1,10 +1,9 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { ImmutableContext, ImmutableSelector } from '@ngxs-labs/immer-adapter';
-import { AddFavorite, DeleteFavorite, LoadContent, ClearContent, SelectId } from './wiki-article.actions';
+import { AddFavorite, DeleteFavorite, LoadContent, ClearContent, SelectId } from '@wiki-search/wiki-article/state/wiki-article.actions';
 import { SearchItem, ParsePage } from '@wiki-search/models/search-result.model';
 import { ApiService } from '@wiki-search/services/api.service';
-import { tap, switchMapTo } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 interface WikiArticlesState {
   /** favorite list */
@@ -104,7 +103,6 @@ export class WikiArticlesStore {
     dispatch(new SelectId(pageId));
 
     return this.api.loadPage(pageId).pipe(
-      // switchMapTo(throwError('Oops! I broked the Wiki!')),
       tap(content => {
         patchState({ content });
       })
