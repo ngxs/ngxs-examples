@@ -1,8 +1,28 @@
-<p>
-  filters-form works!
-</p>
-
 <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
-  <input formControlName="type" />
-  <input formControlName="name" />
+  <section class="filter-section">
+    <div class="input-group-wrapper">
+      <label for="minValue">Minimal order value:</label>
+      <input formControlName="minValue" type="number" id="minValue" />
+    </div>
+
+    <div class="input-group-wrapper">
+      <label for="maxValue">Maximal order value:</label>
+      <input formControlName="maxValue" type="number" id="maxValue" />
+    </div>
+
+    <div class="input-group-wrapper">
+      <label for="status">Order status:</label>
+      <select formControlName="status" id="status">
+        <option *ngFor="let status of orderStatuses" [value]="status">{{ status }}</option>
+      </select>
+    </div>
+
+    <div class="input-group-wrapper">
+      <label for="itemsOnPage">Max orders on page:</label>
+      <select formControlName="itemsOnPage" id="itemsOnPage">
+        <option *ngFor="let number of resultsOnPage" [value]="number">{{ number }}</option>
+      </select>
+    </div>
+  </section>
+  <input type="submit" value="submut" />
 </form>

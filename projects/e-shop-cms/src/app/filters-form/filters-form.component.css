@@ -1,0 +1,21 @@
+.filter-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.input-group-wrapper {
+  display: inline-block;
+  width: 20%;
+}
+
+.input-group-wrapper > label {
+  display: block;
+}
+
+.input-group-wrapper select,
+.input-group-wrapper input {
+  display: block;
+  height: 2rem;
+  width: 100%;
+}

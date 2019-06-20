@@ -1,15 +1,12 @@
-import { ShopApiService } from '@cmsApp/services/shop-api.service';
-
-import { State, Action, StateContext, NgxsOnInit, Selector } from '@ngxs/store';
-
+import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
 import { forkJoin } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { DictionaryStateModel } from '../../models/state/dictionary-state.model';
-
+import { CustomerDTO } from '@cmsApp/shared/models/dto/customer-dto.model';
+import { DictionaryStateModel } from '@cmsApp/shared/models/state/dictionary-state.model';
 import { GetDictionaries } from './dictionary.actions';
 import { ProductDTO } from '@cmsApp/shared/models/dto/product-dto.model';
-import { CustomerDTO } from '@cmsApp/shared/models/dto/customer-dto.model';
+import { ShopApiService } from '@cmsApp/services/shop-api.service';
 
 /**
  *  the state holds dictionaries of customers and products
@@ -43,17 +40,17 @@ export class DictionaryState implements NgxsOnInit {
     constructor(private apiService: ShopApiService) { }
 
     /** load all dictionaries on initialisation */
-    ngxsOnInit({ dispatch }: StateContext<DictionaryStateModel>) {
+    public ngxsOnInit({ dispatch }: StateContext<DictionaryStateModel>): void {
         dispatch(GetDictionaries);
     }
 
     @Action(GetDictionaries)
-    getDictionaries({ patchState }: StateContext<DictionaryStateModel>) {
+    getDictionaries({ setState }: StateContext<DictionaryStateModel>) {
         return forkJoin(
             this.apiService.getCustomersDictionary(),
             this.apiService.getProductsDictionary()
         ).pipe(
-            tap(([customers, products]) => patchState({
+            tap(([customers, products]) => setState({
                 customers,
                 products
             }))

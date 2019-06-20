@@ -16,7 +16,6 @@ export class InMemoryDataService implements InMemoryDbService {
 
   /** mockup database server */
   createDb() {
-
     const customers = customersMockup;
     const orders = ordersMockup;
     const products = produtsMockup;

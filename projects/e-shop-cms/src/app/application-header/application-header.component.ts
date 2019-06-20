@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 /**
  *  top menu of the application
@@ -15,7 +15,7 @@ export class ApplicationHeaderComponent implements OnInit {
   private isFilterVisible = false;
   @Output() public filterVisibilityChange = new EventEmitter<boolean>();
 
-  ngOnInit() {
+  public ngOnInit(): void {
     /** emit the initial filter status */
     this.toggleFilterDisplay();
   }

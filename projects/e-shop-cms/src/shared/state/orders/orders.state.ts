@@ -1,14 +1,14 @@
 import { tap } from 'rxjs/operators';
-import { State, Action, StateContext, NgxsOnInit, Selector } from '@ngxs/store';
+import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
 
-import { OrdersStateModel } from '@cmsApp/shared/models/state/order-state.model';
-import { ShopApiService } from '@cmsApp/services/shop-api.service';
-import { FrontendOrder } from '@cmsApp/shared/models/frontend/frontend-order.model';
-import { FrontendOrderItem } from '@cmsApp/shared/models/frontend/frontend-order-items.model';
-import { OrderStatuses } from '@cmsApp/shared/enums/order-statuses.enum';
 import { DictionaryState } from '../dictionary/dictionary.state';
 import { DictionaryStateModel } from '@cmsApp/shared/models/state/dictionary-state.model';
+import { FrontendOrder } from '@cmsApp/shared/models/order-frontend/frontend-order.model';
+import { FrontendOrderItem } from '@cmsApp/shared/models/order-frontend/frontend-order-items.model';
 import { GetOrders } from './orders.actions';
+import { OrdersStateModel } from '@cmsApp/shared/models/state/order-state.model';
+import { OrderStatuses } from '@cmsApp/shared/enums/order-statuses.enum';
+import { ShopApiService } from '@cmsApp/services/shop-api.service';
 
 /** default state */
 const defaultOrdersState = (): OrdersStateModel => {
@@ -55,7 +55,7 @@ export class OrdersState implements NgxsOnInit {
     }
     constructor(private apiService: ShopApiService) { }
 
-    ngxsOnInit({ dispatch }: StateContext<OrdersStateModel>) {
+    public ngxsOnInit({ dispatch }: StateContext<OrdersStateModel>): void {
         dispatch(GetOrders);
     }
 

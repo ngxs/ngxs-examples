@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   constructor(private store: Store) { }
 
-  ngOnInit() { }
+  public ngOnInit(): void { }
 
 
   /** listen to the header, which emits filter visibility */
