@@ -1,0 +1,8 @@
+<p>
+  filters-form works!
+</p>
+
+<form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+  <input formControlName="type" />
+  <input formControlName="name" />
+</form>

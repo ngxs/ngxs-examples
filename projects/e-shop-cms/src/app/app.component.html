@@ -1,0 +1,5 @@
+<four-application-header (filterVisibilityChange)="toggleFilterDisplay($event)"></four-application-header>
+
+<four-filters-form *ngIf="filterIsVisible"></four-filters-form>
+
+<four-orders-table></four-orders-table>

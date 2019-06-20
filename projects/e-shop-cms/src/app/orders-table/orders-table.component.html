@@ -1,0 +1,28 @@
+<table class="orders-table">
+  <thead>
+    <tr>
+      <th>order id</th>
+      <th>date</th>
+      <th>status</th>
+      <th>total</th>
+      <th>details</th>
+      <th>customer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders$ | async">
+      <td class="order-col">{{ order.id }}</td>
+      <td class="date-col">{{ order.date }}</td>
+      <td class="status-col">{{ order.status }}</td>
+      <td class="total-col">
+        {{ order.total | currency }}
+      </td>
+      <td class="details-col">
+        <div *ngFor="let item of order.details" class="order details">
+          <p>{{ item.product }}: {{ item.price | currency }} x {{ item.quantity | number: '.0' }} = {{ item.subtotal | currency }}</p>
+        </div>
+      </td>
+      <td class="customer-col">{{ order.customer }}</td>
+    </tr>
+  </tbody>
+</table>
