@@ -1,7 +1,14 @@
 <section class="uk-animation-toggle uk-animation-slide-top">
   <h4>Filters</h4>
-
-  <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="uk-grid-small" uk-grid>
+  <form
+    [formGroup]="filterForm"
+    novalidate
+    (ngSubmit)="onSubmit()"
+    (reset)="onReset()"
+    ngxfForm="console.log(ordersState.filterForm)"
+    class="uk-grid-small"
+    uk-grid
+  >
     <div class="uk-width-1-4@s">
       <label class="uk-form-label" for="minValue">Min total</label>
       <input formControlName="minValue" class="uk-input" type="number" id="min-value" min="0" placeholder="enter a value" />
@@ -11,10 +18,10 @@
       <input formControlName="maxValue" class="uk-input" type="number" id="max-value" min="0" placeholder="enter a value" />
     </div>
     <div class="uk-width-1-4@s">
-      <label class="uk-form-label" for="status">Order status</label>
+      <label class="uk-form-label" for="orderStatus">Order status</label>
       <div class="uk-form-controls">
-        <select formControlName="status" class="uk-select" id="status">
-          <option *ngFor="let status of orderStatuses" [value]="status">{{ status }}</option>
+        <select formControlName="orderStatus" class="uk-select" id="orderStatus">
+          <option *ngFor="let i of orderStatuses" [value]="i.value">{{ i.displayText }}</option>
         </select>
       </div>
     </div>
@@ -22,7 +29,7 @@
       <label class="uk-form-label" for="items-on-page">Items on page</label>
       <div class="uk-form-controls">
         <select formControlName="itemsOnPage" class="uk-select" id="items-on-page">
-          <option *ngFor="let number of resultsOnPage" [value]="number">{{ number }}</option>
+          <option *ngFor="let i of resultsOnPage" [value]="i.value">{{ i.displayText }}</option>
         </select>
       </div>
     </div>

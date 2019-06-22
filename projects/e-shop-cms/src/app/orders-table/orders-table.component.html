@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of orders$ | async">
+    <tr *ngFor="let order of orders">
       <td class="order-col">{{ order.id }}</td>
       <td class="date-col">{{ order.date }}</td>
       <td class="status-col">{{ order.status }}</td>

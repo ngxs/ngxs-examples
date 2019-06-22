@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
 
@@ -14,7 +14,5 @@ import { OrdersState } from '@cmsApp/shared/state/orders/orders.state';
   templateUrl: './orders-table.component.html'
 })
 export class OrdersTableComponent {
-
-  @Select(OrdersState.orders)
-  public orders$: Observable<FrontendOrder[]>;
+  @Input() orders: FrontendOrder[];
 }
