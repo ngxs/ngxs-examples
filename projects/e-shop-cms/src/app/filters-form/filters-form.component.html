@@ -1,28 +1,34 @@
-<form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
-  <section class="filter-section">
-    <div class="input-group-wrapper">
-      <label for="minValue">Minimal order value:</label>
-      <input formControlName="minValue" type="number" id="minValue" />
-    </div>
+<section class="uk-animation-toggle uk-animation-slide-top">
+  <h4>Filters</h4>
 
-    <div class="input-group-wrapper">
-      <label for="maxValue">Maximal order value:</label>
-      <input formControlName="maxValue" type="number" id="maxValue" />
+  <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="uk-grid-small" uk-grid>
+    <div class="uk-width-1-4@s">
+      <label class="uk-form-label" for="minValue">Min total</label>
+      <input formControlName="minValue" class="uk-input" type="number" id="min-value" min="0" placeholder="enter a value" />
     </div>
-
-    <div class="input-group-wrapper">
-      <label for="status">Order status:</label>
-      <select formControlName="status" id="status">
-        <option *ngFor="let status of orderStatuses" [value]="status">{{ status }}</option>
-      </select>
+    <div class="uk-width-1-4@s">
+      <label class="uk-form-label" for="maxValue">Max total</label>
+      <input formControlName="maxValue" class="uk-input" type="number" id="max-value" min="0" placeholder="enter a value" />
     </div>
-
-    <div class="input-group-wrapper">
-      <label for="itemsOnPage">Max orders on page:</label>
-      <select formControlName="itemsOnPage" id="itemsOnPage">
-        <option *ngFor="let number of resultsOnPage" [value]="number">{{ number }}</option>
-      </select>
+    <div class="uk-width-1-4@s">
+      <label class="uk-form-label" for="status">Order status</label>
+      <div class="uk-form-controls">
+        <select formControlName="status" class="uk-select" id="status">
+          <option *ngFor="let status of orderStatuses" [value]="status">{{ status }}</option>
+        </select>
+      </div>
     </div>
-  </section>
-  <input type="submit" value="submut" />
-</form>
+    <div class="uk-width-1-4@s">
+      <label class="uk-form-label" for="items-on-page">Items on page</label>
+      <div class="uk-form-controls">
+        <select formControlName="itemsOnPage" class="uk-select" id="items-on-page">
+          <option *ngFor="let number of resultsOnPage" [value]="number">{{ number }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="uk-margin uk-width-1-1">
+      <button class="uk-button uk-button-default uk-align-right uk-button-primary" type="submit">Submit</button>
+      <button class="uk-button uk-button-default uk-align-right uk-button-danger" type="reset">Reset</button>
+    </div>
+  </form>
+</section>

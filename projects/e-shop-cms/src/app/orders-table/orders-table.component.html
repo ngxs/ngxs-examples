@@ -1,4 +1,4 @@
-<table class="orders-table">
+<table class="uk-table uk-table-striped">
   <thead>
     <tr>
       <th>order id</th>
@@ -18,9 +18,11 @@
         {{ order.total | currency }}
       </td>
       <td class="details-col">
-        <div *ngFor="let item of order.details" class="order details">
-          <p>{{ item.product }}: {{ item.price | currency }} x {{ item.quantity | number: '.0' }} = {{ item.subtotal | currency }}</p>
-        </div>
+        <ol>
+          <li *ngFor="let item of order.details" class="order details">
+            <p>{{ item.product }}: {{ item.price | currency }} x {{ item.quantity | number: '.0' }} = {{ item.subtotal | currency }}</p>
+          </li>
+        </ol>
       </td>
       <td class="customer-col">{{ order.customer }}</td>
     </tr>

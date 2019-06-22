@@ -1,0 +1,14 @@
+<ul class="uk-pagination">
+  <li>
+    <button (click)="scrollOnePage(scrollDirection.back)" class="uk-button uk-button-default uk-button-small">
+      <span class="uk-margin-small-right" uk-pagination-previous></span>
+      Previous
+    </button>
+  </li>
+  <li class="uk-margin-auto-left">
+    <button (click)="scrollOnePage(scrollDirection.forward)" class="uk-button uk-button-default uk-button-small">
+      Next
+      <span class="uk-margin-small-left" uk-pagination-next></span>
+    </button>
+  </li>
+</ul>

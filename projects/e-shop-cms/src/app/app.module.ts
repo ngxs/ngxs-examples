@@ -16,13 +16,15 @@ import { AppComponent } from './app.component';
 import { ApplicationHeaderComponent } from './application-header/application-header.component';
 import { FiltersFormComponent } from './filters-form/filters-form.component';
 import { OrdersTableComponent } from './orders-table/orders-table.component';
+import { OrdersPaginationComponent } from './orders-pagination/orders-pagination.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     FiltersFormComponent,
     ApplicationHeaderComponent,
-    OrdersTableComponent
+    OrdersTableComponent,
+    OrdersPaginationComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

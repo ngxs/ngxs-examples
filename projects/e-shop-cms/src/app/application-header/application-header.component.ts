@@ -6,8 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'four-application-header',
-  templateUrl: './application-header.component.html',
-  styleUrls: ['./application-header.component.css']
+  templateUrl: './application-header.component.html'
 })
 export class ApplicationHeaderComponent implements OnInit {
 

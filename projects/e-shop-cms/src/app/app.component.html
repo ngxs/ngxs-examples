@@ -1,5 +1,8 @@
-<four-application-header (filterVisibilityChange)="toggleFilterDisplay($event)"></four-application-header>
+<section class="uk-container uk-container-large">
+  <four-application-header (filterVisibilityChange)="toggleFilterDisplay($event)"></four-application-header>
 
-<four-filters-form *ngIf="filterIsVisible"></four-filters-form>
+  <four-filters-form *ngIf="filterIsVisible"></four-filters-form>
 
-<four-orders-table></four-orders-table>
+  <four-orders-pagination (scrollEvent)="onSinglePageScroll($event)"></four-orders-pagination>
+  <four-orders-table></four-orders-table>
+</section>

@@ -11,8 +11,7 @@ import { OrdersState } from '@cmsApp/shared/state/orders/orders.state';
 
 @Component({
   selector: 'four-orders-table',
-  templateUrl: './orders-table.component.html',
-  styleUrls: ['./orders-table.component.css']
+  templateUrl: './orders-table.component.html'
 })
 export class OrdersTableComponent {
 

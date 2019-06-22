@@ -1,11 +1,12 @@
-<header>
-  <div class="username-container">
-    <h5>&#9812; some user</h5>
+<header class="uk-grid-match uk-width-expand uk-padding uk-animation-fade" uk-grid>
+  <div class="uk-width-1-4@s">
+    <span uk-icon="user"></span>
+    <span class="uk-text-bold">Some user, supposedly admin</span>
   </div>
-  <div class="cms-name-container">
-    <h3>My Awesome E-Commerce CMS</h3>
+  <div class="uk-width-1-2@s">
+    <h1 class="uk-heading-small">e-commerce cms</h1>
   </div>
-  <div class="filter-button-container">
-    <button (click)="toggleFilterDisplay()">toggle filters</button>
+  <div class="uk-width-1-4@s">
+    <button class="uk-button uk-button-default uk-button-small" (click)="toggleFilterDisplay()">Toggle filters</button>
   </div>
 </header>

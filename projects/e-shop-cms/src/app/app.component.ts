@@ -4,6 +4,7 @@ import { GetOrders } from '@cmsApp/shared/state/orders/orders.actions';
 import { GetDictionaries } from '@cmsApp/shared/state/dictionary/dictionary.actions';
 
 import { Store } from '@ngxs/store';
+import { ScrollDirection } from '@cmsApp/shared/enums/scroll-direction.enum';
 
 
 
@@ -13,8 +14,7 @@ import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'four-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
 
@@ -25,6 +25,10 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void { }
 
+  public onSinglePageScroll($event): void {
+    console.log('scroll event detected');
+    console.log($event)
+  }
 
   /** listen to the header, which emits filter visibility */
   public toggleFilterDisplay($event: boolean): void {

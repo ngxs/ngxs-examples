@@ -9,8 +9,7 @@ import { defaultItemsOnPage } from '@cmsApp/shared/constants/default-items-on-pa
 
 @Component({
   selector: 'four-filters-form',
-  templateUrl: './filters-form.component.html',
-  styleUrls: ['./filters-form.component.css']
+  templateUrl: './filters-form.component.html'
 })
 export class FiltersFormComponent implements OnInit {
 
