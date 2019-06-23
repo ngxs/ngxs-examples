@@ -1,21 +1,35 @@
-import { tap, filter } from 'rxjs/operators';
-import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
+import { tap } from 'rxjs/operators';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { DictionaryState } from '../dictionary/dictionary.state';
+import { DictionaryState } from '@cmsApp/shared/state/dictionary/dictionary.state';
 import { DictionaryStateModel } from '@cmsApp/shared/models/state/dictionary-state.model';
+import { displayAllStatuses } from '@cmsApp/shared/constants/display-all-statuses-select-option.const';
 import { FrontendOrder } from '@cmsApp/shared/models/order-frontend/frontend-order.model';
 import { FrontendOrderItem } from '@cmsApp/shared/models/order-frontend/frontend-order-items.model';
-import { GetOrders, SetFilter } from './orders.actions';
+import { GetOrders, ScrollResults, SetFilter } from './orders.actions';
 import { OrdersStateModel } from '@cmsApp/shared/models/state/order-state.model';
 import { OrderStatuses } from '@cmsApp/shared/enums/order-statuses.enum';
 import { ShopApiService } from '@cmsApp/services/shop-api.service';
-import { displayAllStatuses } from '@cmsApp/shared/constants/display-all-statuses-select-option.const';
+import { OrderItemDTO } from '@cmsApp/shared/models/dto/order-item-dto.model';
+import { OrderDTO } from '@cmsApp/shared/models/dto/order-dto.model';
+import { CustomerDTO } from '@cmsApp/shared/models/dto/customer-dto.model';
+
+/**
+ *  this state is responsible for storing orders
+ *  and serving them according to the filter provided
+ */
 
 /** default state */
 const defaultOrdersState = (): OrdersStateModel => {
     return {
-        filterForm: undefined,
-        orders: undefined
+        orderFilter: undefined,
+        filterFormState: {
+            model: undefined,
+            dirty: false,
+            status: undefined,
+            errors: undefined
+        },
+        orders: undefined,
     } as OrdersStateModel;
 };
 
@@ -26,37 +40,31 @@ const defaultOrdersState = (): OrdersStateModel => {
 
 export class OrdersState {
 
+    @Selector()
+    static currentPage(state: OrdersStateModel): number {
+        return state.orderFilter.page;
+    }
+
+    @Selector()
+    static itemsOnPage(state: OrdersStateModel): number {
+        return state.orderFilter.itemsOnPage;
+    }
+
+    /** here goes the heavy lifting of parsing dictionaries
+     *  and creating the model required for the view
+     */
     @Selector([DictionaryState])
-    static orders(state: OrdersStateModel, dictionaryState: DictionaryStateModel): FrontendOrder[] {
+    static filteredOrders(state: OrdersStateModel, dictionaryState: DictionaryStateModel): FrontendOrder[] {
         return state.orders.map(order => {
             const orderCustomer = dictionaryState.customers.find(customer => customer.id === order.customerId);
-            let orderTotal = 0;
-            const orderProducts: FrontendOrderItem[] = [];
-
-            order.products.forEach(product => {
-                const orderedProduct = dictionaryState.products.find(item => item.productId === product.productId);
-                const orderSubtotal = product.quantity * product.itemPrice;
-                orderTotal += orderSubtotal;
-                orderProducts.push({
-                    price: product.itemPrice,
-                    product: orderedProduct.productName,
-                    quantity: product.quantity,
-                    subtotal: orderSubtotal
-                });
-            });
-
-            return {
-                id: order.id,
-                customer: `${orderCustomer.firstName} ${orderCustomer.lastName}`,
-                date: order.date,
-                details: orderProducts,
-                status: order.status as OrderStatuses,
-                total: orderTotal
-            } as FrontendOrder;
+            const orderProducts = order.products.map(product =>
+                convertOrderDtoToFrontendItem(product, dictionaryState)
+            );
+            return convertToFrontendOrder(order, orderCustomer, orderProducts);
         })
-            .filter(item => state.filterForm.maxValue > 0 ? state.filterForm.maxValue >= item.total : true)
-            .filter(item => state.filterForm.minValue > 0 ? state.filterForm.minValue <= item.total : true)
-            .filter(item => (state.filterForm.orderStatus as string) !== displayAllStatuses ? state.filterForm.orderStatus === item.status : true);
+            .filter(item => state.orderFilter.maxValue > 0 ? state.orderFilter.maxValue >= item.total : true)
+            .filter(item => state.orderFilter.minValue > 0 ? state.orderFilter.minValue <= item.total : true)
+            .filter(item => (state.orderFilter.orderStatus as string) !== displayAllStatuses ? state.orderFilter.orderStatus === item.status : true);
     }
     constructor(private apiService: ShopApiService) { }
 
@@ -74,9 +82,41 @@ export class OrdersState {
     }
 
     @Action(SetFilter)
-    setFilter({ patchState }: StateContext<OrdersStateModel>, { filter }: SetFilter) {
+    setFilter({ patchState }: StateContext<OrdersStateModel>, { orderFilter }: SetFilter) {
         patchState({
-            filterForm: filter
+            orderFilter
         });
+    }
+
+    @Action(ScrollResults)
+    scrollResults({ patchState, getState }: StateContext<OrdersStateModel>, { direction }: ScrollResults) {
+        const currentFilter = getState().orderFilter;
+        patchState({
+            orderFilter: { ...currentFilter, page: currentFilter.page + direction }
+        });
+    }
+
+
+}
+
+function convertOrderDtoToFrontendItem(product: OrderItemDTO, dictionaryState: DictionaryStateModel): FrontendOrderItem {
+    const orderedProduct = dictionaryState.products.find(item => item.productId === product.productId);
+    const orderSubtotal = product.quantity * product.itemPrice;
+    return {
+        price: product.itemPrice,
+        product: orderedProduct.productName,
+        quantity: product.quantity,
+        subtotal: orderSubtotal
+    };
+}
+
+function convertToFrontendOrder(order: OrderDTO, orderCustomer: CustomerDTO, orderProducts: FrontendOrderItem[]): FrontendOrder {
+    return {
+        id: order.id,
+        customer: `${orderCustomer.firstName} ${orderCustomer.lastName}`,
+        date: order.date,
+        details: orderProducts,
+        status: order.status as OrderStatuses,
+        total: orderProducts.reduce((total, item) => total += item.subtotal, 0)
     }
 }

@@ -1,10 +1,18 @@
 <section class="uk-container uk-container-large">
-  <four-application-header (filterVisibilityChange)="toggleFilterDisplay($event)"></four-application-header>
+  <header class="uk-background-muted uk-padding uk-padding-remove-vertical" uk-sticky>
+    <four-application-header (filterVisibilityChange)="toggleFilterDisplay($event)"></four-application-header>
 
-  <four-filters-form *ngIf="filterIsVisible" (searchEvent)="onSearchEvent($event)"></four-filters-form>
+    <four-filters-form *ngIf="filterIsVisible" (searchEvent)="onSearchEvent($event)"></four-filters-form>
 
-  <main *ngIf="(orders$ | async)?.length">
-    <four-orders-pagination (scrollEvent)="onSinglePageScroll($event)"></four-orders-pagination>
-    <four-orders-table [orders]="orders$ | async"></four-orders-table>
-  </main>
+    <four-orders-pagination
+      *ngIf="orders?.length"
+      [canScrollForward]="canScrollResultsForward"
+      [canScrollBack]="canScrollResultsBack"
+      (scrollEvent)="onSinglePageScroll($event)"
+    ></four-orders-pagination>
+
+    <hr />
+  </header>
+
+  <four-orders-table *ngIf="orders?.length" [orders]="orders"></four-orders-table>
 </section>

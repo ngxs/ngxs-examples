@@ -1,5 +1,4 @@
-import { OrderStatuses } from '../../enums/order-statuses.enum';
-
+import { OrderStatuses } from '@cmsApp/shared/enums/order-statuses.enum';
 import { FrontendOrderItem } from './frontend-order-items.model';
 
 /** interface for presenting order on frontend */

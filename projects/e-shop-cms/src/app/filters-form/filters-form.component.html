@@ -5,7 +5,7 @@
     novalidate
     (ngSubmit)="onSubmit()"
     (reset)="onReset()"
-    ngxfForm="console.log(ordersState.filterForm)"
+    ngxsForm="ordersState.filterFormState"
     class="uk-grid-small"
     uk-grid
   >
@@ -33,8 +33,10 @@
         </select>
       </div>
     </div>
-    <div class="uk-margin uk-width-1-1">
-      <button class="uk-button uk-button-default uk-align-right uk-button-primary" type="submit">Submit</button>
+    <div class="uk-width-1-1">
+      <button [disabled]="filterForm.invalid" class="uk-button uk-button-default uk-align-right uk-button-primary" type="submit">
+        Submit
+      </button>
       <button class="uk-button uk-button-default uk-align-right uk-button-danger" type="reset">Reset</button>
     </div>
   </form>

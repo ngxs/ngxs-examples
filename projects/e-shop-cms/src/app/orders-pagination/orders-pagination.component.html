@@ -1,12 +1,16 @@
-<ul class="uk-pagination">
+<ul class="uk-pagination uk-animation-toggle uk-animation-slide-bottom">
   <li>
-    <button (click)="scrollOnePage(scrollDirection.back)" class="uk-button uk-button-default uk-button-small">
+    <button [disabled]="!canScrollBack" (click)="scrollOnePage(scrollDirection.back)" class="uk-button uk-button-default uk-button-small">
       <span class="uk-margin-small-right" uk-pagination-previous></span>
       Previous
     </button>
   </li>
   <li class="uk-margin-auto-left">
-    <button (click)="scrollOnePage(scrollDirection.forward)" class="uk-button uk-button-default uk-button-small">
+    <button
+      [disabled]="!canScrollForward"
+      (click)="scrollOnePage(scrollDirection.forward)"
+      class="uk-button uk-button-default uk-button-small"
+    >
       Next
       <span class="uk-margin-small-left" uk-pagination-next></span>
     </button>

@@ -1,7 +1,8 @@
-import { SelectOption } from '@cmsApp/shared/models/select-option.model';
-import { OrderStatuses } from '@cmsApp/shared/enums/order-statuses.enum';
 import { displayAllStatuses } from './display-all-statuses-select-option.const';
+import { OrderStatuses } from '@cmsApp/shared/enums/order-statuses.enum';
+import { SelectOption } from '@cmsApp/shared/models/select-option.model';
 
+/** dropdown options for the status select input of the search filter */
 export const orderStatusOptions: SelectOption[] = [
     {
         displayText: 'Only new',

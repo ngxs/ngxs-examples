@@ -1,31 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from '@cmsApp/services/in-memory-data.service';
-import { SharedModule } from '@cmsApp/shared/shared.module';
-import { stateList } from '@cmsApp/shared/state/state-list';
+
 import { AppComponent } from './app.component';
 import { ApplicationHeaderComponent } from './application-header/application-header.component';
 import { FiltersFormComponent } from './filters-form/filters-form.component';
-import { OrdersTableComponent } from './orders-table/orders-table.component';
+import { InMemoryDataService } from '@cmsApp/services/in-memory-data.service';
 import { OrdersPaginationComponent } from './orders-pagination/orders-pagination.component';
-import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { OrdersTableComponent } from './orders-table/orders-table.component';
+import { SharedModule } from '@cmsApp/shared/shared.module';
+import { stateList } from '@cmsApp/shared/state/state-list';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    FiltersFormComponent,
     ApplicationHeaderComponent,
+    FiltersFormComponent,
+    OrdersPaginationComponent,
     OrdersTableComponent,
-    OrdersPaginationComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule,
+    BrowserModule,
+    HttpClientModule,
 
     /**
      *  The HttpClientInMemoryWebApiModule module intercepts HTTP requests

@@ -1,8 +1,10 @@
 import { OrderStatuses } from '@cmsApp/shared/enums/order-statuses.enum';
 
+/** filter form values model */
 export interface OrdersFilterForm {
-    minValue?: number;
-    maxValue?: number;
-    orderStatus?: OrderStatuses;
     itemsOnPage: number;
+    maxValue?: number;
+    minValue?: number;
+    orderStatus?: OrderStatuses;
+    page: number;
 }

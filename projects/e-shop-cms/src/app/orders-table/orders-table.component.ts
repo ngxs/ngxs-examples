@@ -1,9 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Select } from '@ngxs/store';
 
 import { FrontendOrder } from '@cmsApp/shared/models/order-frontend/frontend-order.model';
-import { OrdersState } from '@cmsApp/shared/state/orders/orders.state';
 
 /**
  *  component for presenting orders in a table

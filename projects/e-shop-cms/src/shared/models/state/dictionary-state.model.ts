@@ -1,5 +1,5 @@
-import { CustomerDTO } from '../dto/customer-dto.model';
-import { ProductDTO } from '../dto/product-dto.model';
+import { CustomerDTO } from '@cmsApp/shared/models/dto/customer-dto.model';
+import { ProductDTO } from '@cmsApp/shared/models/dto/product-dto.model';
 
 /** the dictionary store */
 export interface DictionaryStateModel {

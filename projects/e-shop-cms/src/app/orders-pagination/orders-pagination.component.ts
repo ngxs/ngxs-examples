@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ScrollDirection } from '@cmsApp/shared/enums/scroll-direction.enum';
 
@@ -13,6 +13,11 @@ import { ScrollDirection } from '@cmsApp/shared/enums/scroll-direction.enum';
 export class OrdersPaginationComponent {
 
   public scrollDirection = ScrollDirection;
+
+  /** determines if scroll forward button is blocked */
+  @Input() canScrollForward = false;
+  /** determines if scroll back button is blocked */
+  @Input() canScrollBack = false;
 
   /** pass scroll direction to parent component */
   @Output() scrollEvent = new EventEmitter<ScrollDirection>();
