@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
-import { customersMockup } from '../shared/mockups/customers.mockup';
-import { ordersMockup } from '../shared/mockups/orders.mockup';
-import { produtsMockup } from '../shared/mockups/products.mockup';
+import { customersMockup } from '@cmsApp/shared/mockups/customers.mockup';
+import { ordersMockup } from '@cmsApp/shared/mockups/orders.mockup';
+import { produtsMockup } from '@cmsApp/shared/mockups/products.mockup';
 
 /**
  *  backend emulation service

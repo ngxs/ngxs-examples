@@ -1,4 +1,4 @@
-import { ProductDTO } from '../models/dto/product-dto.model';
+import { ProductDTO } from '@cmsApp/shared/models/dto/product-dto.model';
 
 export const produtsMockup: ProductDTO[] = [{ productId: 1, productName: 'Baking Soda', productPrice: 0.62 },
 { productId: 2, productName: 'Beer - Camerons Auburn', productPrice: 8.25 },

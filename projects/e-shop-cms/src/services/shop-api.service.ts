@@ -2,9 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { CustomerDTO } from '../shared/models/dto/customer-dto.model';
-import { OrderDTO } from '../shared/models/dto/order-dto.model';
-import { ProductDTO } from '../shared/models/dto/product-dto.model';
+import { CustomerDTO } from '@cmsApp/shared/models/dto/customer-dto.model';
+import { OrderDTO } from '@cmsApp/shared/models/dto/order-dto.model';
+import { ProductDTO } from '@cmsApp/shared/models/dto/product-dto.model';
 
 /**
  *  api service for retrievong data from server

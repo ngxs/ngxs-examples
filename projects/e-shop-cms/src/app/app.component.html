@@ -14,5 +14,9 @@
     <hr />
   </header>
 
-  <four-orders-table *ngIf="orders?.length" [orders]="orders"></four-orders-table>
+  <four-orders-table *ngIf="orders?.length; else noResults" [orders]="orders"></four-orders-table>
+
+  <ng-template #noResults>
+    <div class="uk-placeholder uk-text-center">Here be search results.</div>
+  </ng-template>
 </section>

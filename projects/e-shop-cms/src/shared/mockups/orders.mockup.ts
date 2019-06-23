@@ -1,4 +1,4 @@
-import { OrderDTO } from '../models/dto/order-dto.model';
+import { OrderDTO } from '@cmsApp/shared/models/dto/order-dto.model';
 
 export const ordersMockup: OrderDTO[] = [
     {

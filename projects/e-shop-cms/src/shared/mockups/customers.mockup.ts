@@ -1,4 +1,4 @@
-import { CustomerDTO } from '../models/dto/customer-dto.model';
+import { CustomerDTO } from '@cmsApp/shared/models/dto/customer-dto.model';
 
 export const customersMockup: CustomerDTO[] = [
     { id: 1, firstName: 'Kristoffer', lastName: 'Richings', email: 'krichings0@friendfeed.com', gender: 'Male', ipAddress: '94.57.120.168' },
