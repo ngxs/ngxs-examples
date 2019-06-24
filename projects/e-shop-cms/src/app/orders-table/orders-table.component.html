@@ -12,10 +12,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let order of orders">
-        <td class="order-col">{{ order.id }}</td>
-        <td class="date-col">{{ order.date }}</td>
-        <td class="status-col">{{ order.status }}</td>
-        <td class="total-col">
+        <td>{{ order.id }}</td>
+        <td>{{ order.date }}</td>
+        <td>{{ order.status }}</td>
+        <td>
           {{ order.total | currency }}
         </td>
         <td>
@@ -23,14 +23,14 @@
             <div>
               <a class="uk-accordion-title uk-text-small">view details</a>
               <ul class="uk-accordion-content">
-                <li *ngFor="let item of order.details" class="order details">
+                <li *ngFor="let item of order.details">
                   {{ item.product }}: {{ item.price | currency }} x {{ item.quantity | number: '.0' }} = {{ item.subtotal | currency }}
                 </li>
               </ul>
             </div>
           </div>
         </td>
-        <td class="customer-col">{{ order.customer }}</td>
+        <td>{{ order.customer }}</td>
       </tr>
     </tbody>
   </table>

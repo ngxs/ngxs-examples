@@ -57,10 +57,25 @@ export class OrdersState {
     static filteredOrders(state: OrdersStateModel, dictionaryState: DictionaryStateModel): FrontendOrder[] {
         return state.orders.map(order => {
             const orderCustomer = dictionaryState.customers.find(customer => customer.id === order.customerId);
-            const orderProducts = order.products.map(product =>
-                convertOrderDtoToFrontendItem(product, dictionaryState)
+            const orderProducts = order.products.map(product => {
+                const productInDictionary = dictionaryState.products.find(item => item.productId === product.productId);
+                const orderSubtotal = product.quantity * product.itemPrice;
+                return {
+                    price: product.itemPrice,
+                    product: productInDictionary.productName,
+                    quantity: product.quantity,
+                    subtotal: orderSubtotal
+                } as FrontendOrderItem;
+            }
             );
-            return convertToFrontendOrder(order, orderCustomer, orderProducts);
+            return {
+                id: order.id,
+                customer: `${orderCustomer.firstName} ${orderCustomer.lastName}`,
+                date: order.date,
+                details: orderProducts,
+                status: order.status as OrderStatuses,
+                total: orderProducts.reduce((total, item) => total += item.subtotal, 0)
+            } as FrontendOrder;
         })
             .filter(item => state.orderFilter.maxValue > 0 ? state.orderFilter.maxValue >= item.total : true)
             .filter(item => state.orderFilter.minValue > 0 ? state.orderFilter.minValue <= item.total : true)
@@ -95,26 +110,4 @@ export class OrdersState {
             orderFilter: { ...currentFilter, page: currentFilter.page + direction }
         });
     }
-}
-
-function convertOrderDtoToFrontendItem(product: OrderItemDTO, dictionaryState: DictionaryStateModel): FrontendOrderItem {
-    const orderedProduct = dictionaryState.products.find(item => item.productId === product.productId);
-    const orderSubtotal = product.quantity * product.itemPrice;
-    return {
-        price: product.itemPrice,
-        product: orderedProduct.productName,
-        quantity: product.quantity,
-        subtotal: orderSubtotal
-    };
-}
-
-function convertToFrontendOrder(order: OrderDTO, orderCustomer: CustomerDTO, orderProducts: FrontendOrderItem[]): FrontendOrder {
-    return {
-        id: order.id,
-        customer: `${orderCustomer.firstName} ${orderCustomer.lastName}`,
-        date: order.date,
-        details: orderProducts,
-        status: order.status as OrderStatuses,
-        total: orderProducts.reduce((total, item) => total += item.subtotal, 0)
-    };
 }
