@@ -14,10 +14,10 @@ import { ShopApiService } from '@cmsApp/services/shop-api.service';
 
 /** default state */
 const defaultDictionaryState = (): DictionaryStateModel => {
-    return {
+    return <DictionaryStateModel>{
         customers: undefined,
         products: undefined
-    } as DictionaryStateModel;
+    };
 };
 
 @State<DictionaryStateModel>({

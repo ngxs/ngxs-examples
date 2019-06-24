@@ -13,6 +13,7 @@ import { OrderItemDTO } from '@cmsApp/shared/models/dto/order-item-dto.model';
 import { OrdersStateModel } from '@cmsApp/shared/models/state/order-state.model';
 import { OrderStatuses } from '@cmsApp/shared/enums/order-statuses.enum';
 import { ShopApiService } from '@cmsApp/services/shop-api.service';
+import { FilterFormState } from '@cmsApp/shared/models/state/form-state.model';
 
 /**
  *  this state is responsible for storing orders
@@ -23,14 +24,14 @@ import { ShopApiService } from '@cmsApp/services/shop-api.service';
 const defaultOrdersState = (): OrdersStateModel => {
     return {
         orderFilter: undefined,
-        filterFormState: {
+        filterFormState: <FilterFormState>{
             model: undefined,
             dirty: false,
             status: undefined,
             errors: undefined
         },
         orders: undefined,
-    } as OrdersStateModel;
+    };
 };
 
 @State<OrdersStateModel>({
@@ -60,22 +61,22 @@ export class OrdersState {
             const orderProducts = order.products.map(product => {
                 const productInDictionary = dictionaryState.products.find(item => item.productId === product.productId);
                 const orderSubtotal = product.quantity * product.itemPrice;
-                return {
+                return <FrontendOrderItem>{
                     price: product.itemPrice,
                     product: productInDictionary.productName,
                     quantity: product.quantity,
                     subtotal: orderSubtotal
-                } as FrontendOrderItem;
+                };
             }
             );
-            return {
+            return <FrontendOrder>{
                 id: order.id,
                 customer: `${orderCustomer.firstName} ${orderCustomer.lastName}`,
                 date: order.date,
                 details: orderProducts,
                 status: order.status as OrderStatuses,
                 total: orderProducts.reduce((total, item) => total += item.subtotal, 0)
-            } as FrontendOrder;
+            };
         })
             .filter(item => state.orderFilter.maxValue > 0 ? state.orderFilter.maxValue >= item.total : true)
             .filter(item => state.orderFilter.minValue > 0 ? state.orderFilter.minValue <= item.total : true)

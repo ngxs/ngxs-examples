@@ -4,6 +4,7 @@
   "rules": {
     "array-type": false,
     "arrow-parens": false,
+    "no-angle-bracket-type-assertion": false,
     "deprecation": {
       "severity": "warn"
     },
