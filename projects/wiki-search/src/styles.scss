@@ -1,0 +1,40 @@
+@import 'vars';
+
+html {
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue', 'Helvetica', 'Arial',
+    sans-serif;
+}
+
+body {
+  margin: $bodyMargin;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: calc(#{$rowBarHeight} - 2px);
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 1px solid darkgrey;
+}
+
+.fa-star {
+  color: orangered;
+  cursor: pointer;
+}
+
+.fa-book {
+  color: green;
+  cursor: pointer;
+}
+
+.fa-trash {
+  color: palevioletred;
+  cursor: pointer;
+}

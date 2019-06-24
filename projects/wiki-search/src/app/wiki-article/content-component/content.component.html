@@ -1,0 +1,17 @@
+<div class="title">{{ articleTitle$ | async }}</div>
+<div class="status">
+  <ng-container *ngTemplateOutlet="inProgress ? progressBar : emptyBar"></ng-container>
+</div>
+
+<div class="content" [innerHTML]="safeContent$ | async"></div>
+
+<ng-template #progressBar>
+  Loading content
+  <i class="fa fa-refresh  fa-spin"></i>
+</ng-template>
+
+<ng-template #emptyBar>
+  {{ (safeContent$ | async) && !errorString ? '' : 'No selected article' }}
+</ng-template>
+
+<span class="error-msg" *ngIf="errorString">{{ errorString }}</span>

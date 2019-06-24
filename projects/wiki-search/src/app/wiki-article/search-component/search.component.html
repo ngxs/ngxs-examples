@@ -1,0 +1,18 @@
+<div class="search-bar">
+  <input (keyup.enter)="onSearch()" placeholder="Type a topic" [formControl]="inputControl" />
+  <button (click)="onSearch()">Find</button>
+</div>
+
+<div class="results">
+  Results: {{ !inProgress ? searchItems.length : '' }}
+  <i *ngIf="inProgress" class="fa fa-refresh  fa-spin"></i>
+</div>
+
+<div class="result-grid">
+  <ng-template ngFor let-item [ngForOf]="searchItems">
+    <div class="label">{{ item.title }}</div>
+    <i (click)="addFavorite(item)" class="fa fa-star"></i>
+  </ng-template>
+</div>
+
+<div class="error-msg">{{ errorMsg }}</div>
