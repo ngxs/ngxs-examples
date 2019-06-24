@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@wiki-search/*": ["projects/wiki-search/src/app/*"]
+      "@wiki-search/*": ["projects/wiki-search/src/app/*"],
+      "@cmsApp/*": ["projects/e-shop-cms/src/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

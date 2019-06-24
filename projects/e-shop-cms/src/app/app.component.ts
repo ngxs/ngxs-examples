@@ -1,31 +1,85 @@
-import { Component } from '@angular/core';
+import { combineLatest, Observable, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+
+import { FrontendOrder } from '@cmsApp/shared/models/order-frontend/frontend-order.model';
+import { GetOrders, ScrollResults } from '@cmsApp/shared/state/orders/orders.actions';
+import { OrdersFilterForm } from '@cmsApp/shared/models/orders-filter.model';
+import { OrdersState } from '@cmsApp/shared/state/orders/orders.state';
+import { ScrollDirection } from '@cmsApp/shared/enums/scroll-direction.enum';
+import { SetFilter } from '@cmsApp/shared/state/orders/orders.actions';
+
+/**
+ *  main app component
+ */
 
 @Component({
   selector: 'four-root',
-  template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center">
-      <h1>
-        Welcome to {{title}}!
-      </h1>
-      <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-    </div>
-    <h2>Here are some links to help you start: </h2>
-    <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
-    </ul>
-    
-  `,
-  styles: []
+  templateUrl: './app.component.html'
 })
-export class AppComponent {
-  title = 'e-shop-cms';
+export class AppComponent implements OnInit, OnDestroy {
+
+  @Select(OrdersState.filteredOrders)
+  public filteredOrders$: Observable<FrontendOrder[]>;
+
+  @Select(OrdersState.currentPage)
+  public currentPage$: Observable<number>;
+
+  @Select(OrdersState.itemsOnPage)
+  public itemsOnPage$: Observable<number>;
+
+  /** filter visibility switch */
+  public filterIsVisible: boolean;
+  /** flag passed to pagination */
+  public canScrollResultsForward = false;
+  /** flag passed to pagination */
+  public canScrollResultsBack = false;
+  /** items passed to the display table component */
+  public orders: FrontendOrder[];
+  private filterSubscription: Subscription;
+
+  constructor(private store: Store) { }
+
+  public ngOnInit(): void {
+    this.subscribeToOrderFilterChanges();
+  }
+
+  public ngOnDestroy(): void {
+    this.filterSubscription.unsubscribe();
+  }
+
+  /** scroll a page forward or back */
+  public onSinglePageScroll($event: ScrollDirection): void {
+    this.scrollPageToStart();
+    this.store.dispatch(new ScrollResults($event));
+  }
+
+  /** update filter and request results */
+  public onSearchEvent($event: OrdersFilterForm): void {
+    this.scrollPageToStart();
+    this.store.dispatch(new SetFilter($event));
+    this.store.dispatch(GetOrders);
+  }
+
+  /** listen to the header, which emits filter visibility */
+  public toggleFilterDisplay($event: boolean): void {
+    this.filterIsVisible = $event;
+  }
+
+  /** go to top */
+  private scrollPageToStart(): void {
+    window.scrollTo(0, 0);
+  }
+
+  /** update the state of buttons and results on store changes */
+  private subscribeToOrderFilterChanges(): void {
+    this.filterSubscription = combineLatest(this.filteredOrders$, this.currentPage$, this.itemsOnPage$).subscribe(([orders, currentPage, itemsOnPage]) => {
+      this.canScrollResultsBack = currentPage > 1;
+      this.canScrollResultsForward = orders ? currentPage * itemsOnPage < orders.length : false;
+
+      if (orders) {
+        this.orders = orders.slice((currentPage - 1) * itemsOnPage, currentPage * itemsOnPage);
+      }
+    });
+  }
 }
