@@ -49,7 +49,9 @@
               "node_modules/font-awesome/css/font-awesome.css"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["projects/wiki-search/src/app/styles"]
+              "includePaths": [
+                "projects/wiki-search/src/app/styles"
+              ]
             },
             "scripts": [],
             "es5BrowserSupport": true
@@ -135,7 +137,9 @@
               "projects/single-selector/src/favicon.ico",
               "projects/single-selector/src/assets"
             ],
-            "styles": ["projects/single-selector/src/styles.css"],
+            "styles": [
+              "projects/single-selector/src/styles.css"
+            ],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -190,7 +194,9 @@
             "polyfills": "projects/single-selector/src/polyfills.ts",
             "tsConfig": "projects/single-selector/tsconfig.spec.json",
             "karmaConfig": "projects/single-selector/karma.conf.js",
-            "styles": ["projects/single-selector/src/styles.css"],
+            "styles": [
+              "projects/single-selector/src/styles.css"
+            ],
             "scripts": [],
             "assets": [
               "projects/single-selector/src/favicon.ico",
@@ -205,7 +211,9 @@
               "projects/single-selector/tsconfig.app.json",
               "projects/single-selector/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -251,7 +259,9 @@
               "projects/document-printing/src/favicon.ico",
               "projects/document-printing/src/assets"
             ],
-            "styles": ["projects/document-printing/src/styles.css"],
+            "styles": [
+              "projects/document-printing/src/styles.css"
+            ],
             "scripts": [],
             "es5BrowserSupport": true
           },
@@ -306,7 +316,9 @@
             "polyfills": "projects/document-printing/src/polyfills.ts",
             "tsConfig": "projects/document-printing/tsconfig.spec.json",
             "karmaConfig": "projects/document-printing/karma.conf.js",
-            "styles": ["projects/document-printing/src/styles.css"],
+            "styles": [
+              "projects/document-printing/src/styles.css"
+            ],
             "scripts": [],
             "assets": [
               "projects/document-printing/src/favicon.ico",
@@ -321,7 +333,9 @@
               "projects/document-printing/tsconfig.app.json",
               "projects/document-printing/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -368,9 +382,13 @@
               "projects/e-shop-cms/src/assets"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["./"]
+              "includePaths": [
+                "./"
+              ]
             },
-            "styles": ["projects/e-shop-cms/src/styles.scss"],
+            "styles": [
+              "projects/e-shop-cms/src/styles.scss"
+            ],
             "scripts": [
               "./node_modules/uikit/dist/js/uikit.min.js",
               "./node_modules/uikit/dist/js/uikit-icons.min.js"
@@ -428,7 +446,9 @@
             "polyfills": "projects/e-shop-cms/src/polyfills.ts",
             "tsConfig": "projects/e-shop-cms/tsconfig.spec.json",
             "karmaConfig": "projects/e-shop-cms/karma.conf.js",
-            "styles": ["projects/e-shop-cms/src/styles.css"],
+            "styles": [
+              "projects/e-shop-cms/src/styles.css"
+            ],
             "scripts": [],
             "assets": [
               "projects/e-shop-cms/src/favicon.ico",
@@ -443,11 +463,16 @@
               "projects/e-shop-cms/tsconfig.app.json",
               "projects/e-shop-cms/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "wiki-search"
+  "defaultProject": "wiki-search",
+  "cli": {
+    "analytics": "bcb18a5e-d918-4eaa-a601-6cda57a18a92"
+  }
 }

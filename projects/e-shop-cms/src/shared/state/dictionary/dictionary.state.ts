@@ -7,6 +7,7 @@ import { DictionaryStateModel } from '@cmsApp/shared/models/state/dictionary-sta
 import { GetDictionaries } from './dictionary.actions';
 import { ProductDTO } from '@cmsApp/shared/models/dto/product-dto.model';
 import { ShopApiService } from '@cmsApp/services/shop-api.service';
+import { Injectable } from '@angular/core';
 
 /**
  *  the state holds dictionaries of customers and products
@@ -24,7 +25,7 @@ const defaultDictionaryState = (): DictionaryStateModel => {
     name: 'dictionaryState',
     defaults: defaultDictionaryState()
 })
-
+@Injectable()   
 export class DictionaryState implements NgxsOnInit {
 
     @Selector()

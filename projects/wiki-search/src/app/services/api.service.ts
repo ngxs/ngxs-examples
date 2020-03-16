@@ -10,7 +10,7 @@ import { SearchResult, ParsePage } from '@wiki-search/models/search-result.model
   providedIn: 'root'
 })
 export class ApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   search(srsearch: string): Observable<SearchResult> {
     return this.http.get<SearchResult>('/wiki-api', {

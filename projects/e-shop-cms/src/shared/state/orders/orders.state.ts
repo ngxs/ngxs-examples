@@ -14,6 +14,7 @@ import { OrdersStateModel } from '@cmsApp/shared/models/state/order-state.model'
 import { OrderStatuses } from '@cmsApp/shared/enums/order-statuses.enum';
 import { ShopApiService } from '@cmsApp/services/shop-api.service';
 import { FilterFormState } from '@cmsApp/shared/models/state/form-state.model';
+import { Injectable } from '@angular/core';
 
 /**
  *  this state is responsible for storing orders
@@ -38,7 +39,7 @@ const defaultOrdersState = (): OrdersStateModel => {
     name: 'ordersState',
     defaults: defaultOrdersState()
 })
-
+@Injectable()
 export class OrdersState {
 
     @Selector()

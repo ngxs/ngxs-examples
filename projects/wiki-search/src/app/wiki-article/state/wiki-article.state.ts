@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { ImmutableContext, ImmutableSelector } from '@ngxs-labs/immer-adapter';
 import { AddFavorite, DeleteFavorite, LoadContent, ClearContent, SelectId } from '@wiki-search/wiki-article/state/wiki-article.actions';
@@ -18,12 +19,13 @@ interface WikiArticlesState {
   name: 'wikiArticles',
   defaults: { favorites: [], content: null, selectetId: null }
 })
+@Injectable()
 export class WikiArticlesStore {
   /**
    * we can inject dependencies as in services or components,
    * but we can't use they for static methods
    */
-  constructor(private api: ApiService) {}
+  constructor(private readonly api: ApiService) {}
 
   /**
    * we can give a part of state through clean function,
@@ -41,7 +43,11 @@ export class WikiArticlesStore {
   /** give away raw article content */
   @Selector()
   static content(state: WikiArticlesState): string | null {
-    return state.content && state.content.parse.text['*'];
+    if (state.selectetId && !state.content) {
+      return 'Loading...';
+    }
+
+    return state.content ? state.content.parse.text['*'] : 'Empty';
   }
 
   /**

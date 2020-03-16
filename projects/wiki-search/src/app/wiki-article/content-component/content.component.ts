@@ -25,7 +25,7 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   /** get unsafe content of selected article as Observable */
   @Select(WikiArticlesStore.content)
-  private unsafeContent$: Observable<string>;
+  public unsafeContent$: Observable<string>;
 
   /** safe content of selected article as Observable */
   public safeContent$: Observable<SafeHtml>;
